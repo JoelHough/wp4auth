@@ -1,0 +1,7 @@
+base   wp4auth
+author Joel Hough
+email  joel@joelhough.com
+date   2015-03-18
+name   wp4auth plugin
+desc   Auth against WordPress 4
+url    https://github.com/JoelHough/wp4auth
