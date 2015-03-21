@@ -43,6 +43,19 @@ class auth_plugin_wp4auth extends DokuWiki_Auth_Plugin {
                 msg("is_ssl() is already defined. Please change the name of the function in the DokuWiki code.", -1);
             } else {
                 require $wpload_path;
+                $process = array(&$_GET, &$_POST, &$_COOKIE);
+                while (list($key, $val) = each($process)) {
+                    foreach ($val as $k => $v) {
+                        unset($process[$key][$k]);
+                        if (is_array($v)) {
+                            $process[$key][stripslashes($k)] = $v;
+                            $process[] = &$process[$key][stripslashes($k)];
+                        } else {
+                            $process[$key][stripslashes($k)] = stripslashes($v);
+                        }
+                    }
+                }
+                unset($process);
                 $this->success = true;
             }
         }
